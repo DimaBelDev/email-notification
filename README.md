@@ -11,5 +11,5 @@ email - string
 
 Run App:
 
-docker-compose up -d
-click run
+1.docker-compose up -d
+2.click run
