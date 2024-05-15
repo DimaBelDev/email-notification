@@ -1,15 +1,15 @@
 The Notification Service helps registered clients receive an email confirmation of their registration.
 
+
 Endpoint:
+* (POST) api/v1/auth
+1. firstname - string
+2. lastname  - srting
+3. password - string
+4. email - string
 
-(POST) api/v1/auth
-
-firstname - string
-lastname - srting
-password - string
-email - string
 
 Run App:
+1. docker-compose up -d
+2. click run
 
-1.docker-compose up -d
-2.click run
