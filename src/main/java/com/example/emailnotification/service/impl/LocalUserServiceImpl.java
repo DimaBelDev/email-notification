@@ -1,7 +1,6 @@
 package com.example.emailnotification.service.impl;
 
 
-import com.example.emailnotification.entity.LocalUser;
 import com.example.emailnotification.repository.LocalUserRepository;
 import com.example.emailnotification.service.LocalUserService;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class LocalUserServiceImpl implements LocalUserService {
 
+
     private final LocalUserRepository localUserRepository;
 
 
@@ -22,12 +22,9 @@ public class LocalUserServiceImpl implements LocalUserService {
         return new UserDetailsService() {
             @Override
             public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-                     LocalUser localUsert = localUserRepository.findByEmail(email);
-                     if(localUsert!=null) {
-                         return localUsert;
-                     } else {
-                         throw new UsernameNotFoundException("User is not found");
-                     }
+                      return localUserRepository.findByEmail(email).
+                             orElseThrow(() -> new UsernameNotFoundException("User is not found"));
+
             }
         };
     }

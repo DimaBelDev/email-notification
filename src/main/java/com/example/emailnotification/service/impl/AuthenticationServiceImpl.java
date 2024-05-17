@@ -22,10 +22,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public void register(RegistrationRequest request) throws UserAlreadyExistException {
-        if(userRepository.findByEmail(request.getEmail()) != null) {
+        if(userRepository.findByEmail(request.getEmail()).isPresent()) {
             throw new UserAlreadyExistException();
         }
-        var user = LocalUser.builder()
+        LocalUser user = LocalUser.builder()
                 .firstname(request.getFirstName())
                 .lastname(request.getLastName())
                 .email(request.getEmail())
@@ -41,6 +41,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         emailService.sendVerificationEmail(emailSendDetailsRequest);
 
-        userRepository.addLocalUser(user);
+        userRepository.save(user);
     }
 }
